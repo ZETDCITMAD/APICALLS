@@ -3,12 +3,11 @@ package com.example.api
 import okhttp3.*
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.IOException
 
 fun makeHttpRequest() {
-    val authToken = "YOUR_AUTH_TOKEN"
-    //val apiUrl = "http://api.coinpaprika.com/v1/coins/btc-bitcoin"
-    val apiUrl = "https://172.16.13.12:5050/selfservice/viewtokens/37263841993"
+    val apiUrl = "http://172.16.13.12:5050/selfservice/viewtokens/37263841993"
 
     val client = OkHttpClient()
     val queryParams = mapOf(
@@ -25,7 +24,7 @@ fun makeHttpRequest() {
         urlBuilder.addQueryParameter(key, value)
     }
     val requestUrl = urlBuilder.build().toString()
-    val requestBody = RequestBody.create("application/json".toMediaTypeOrNull(), "{}")
+    val requestBody = "{}".toRequestBody("application/json".toMediaTypeOrNull())
     val request = Request.Builder()
         .url(requestUrl)
         //.addHeader("Authorization", "Bearer $authToken")
